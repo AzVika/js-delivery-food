@@ -38,8 +38,8 @@ const getData = async function(url) {
 	const response = await fetch(url);
 
 	if(!response.ok) {
-		throw new Error(`Ошибка по адресу ${url},
-			статус ошибки ${response,status}`);
+		throw new Error(`Помилка за адресою ${url},
+			статус помилки ${response,status}`);
 	}
 	return await response.json();
 
@@ -92,8 +92,6 @@ function authorized () {
 		returnMain();		
 	}
 
-	console.log("Авторизован");
-
 	userName.textContent = login;
 
 	buttonAuth.style.display = "none";
@@ -107,7 +105,6 @@ function authorized () {
 
 
 function notAuthorized () {
-	console.log("не авторизован");
 
 	function logIn (event) {
 		event.preventDefault();
@@ -157,13 +154,13 @@ function createCardRestaurant({ image, kitchen, name, price, stars,
 		<div class="card-text">
 			<div class="card-heading">
 				<h3 class="card-title">${name}</h3>
-				<span class="card-tag tag">${timeOfDelivery} мин</span>
+				<span class="card-tag tag">${timeOfDelivery} хв</span>
 			</div>
 			<div class="card-info">
 				<div class="rating">
 					${stars}
 				</div>
-				<div class="price">От ${price} ₽</div>
+				<div class="price">Від ${price} ₴</div>
 				<div class="category">${kitchen}</div>
 			</div>
 		</div>
@@ -188,10 +185,10 @@ function createCardGood({ description, image, name, price, id }) {
 			</div>
 			<div class="card-buttons">
 				<button class="button button-primary button-add-cart" id="${id}">
-					<span class="button-card-text">В корзину</span>
+					<span class="button-card-text">У кошик</span>
 					<span class="button-cart-svg"></span>
 				</button>
-				<strong class="card-price card-price-bold">${price} ₽</strong>
+				<strong class="card-price card-price-bold">${price} ₴</strong>
 			</div>
 		</div>
 	`);
@@ -215,7 +212,7 @@ function openGoods(event) {
 
 			restaurantTitle.textContent = name;
 			rating.textContent = stars;
-			minPrice.textContent = `От ${price} Р`;
+			minPrice.textContent = `Від ${price} ₴`;
 			category.textContent = "";
 
 			getData(`./db/${restaurant.products}`).then(function(data) {
@@ -265,7 +262,7 @@ function searchAllGoods (event) {
 
 							returnRestaurants();
 
-							restaurantTitle.textContent = "Результат поиска";
+							restaurantTitle.textContent = "Результат пошуку";
 							rating.textContent = "";
 							minPrice.textContent = "";
 							category.textContent = "";
@@ -336,7 +333,7 @@ function renderCart () {
 		return result + parseFloat(item.cost) * item.count;
 	}, 0);
 
-	modalPrice.textContent = totalPrice + " ₽";
+	modalPrice.textContent = totalPrice + " ₴";
 }
 
 
